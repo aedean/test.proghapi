@@ -20,7 +20,7 @@ self.addEventListener('fetch', function(event) {
   }
 })
 */
-/*
+
 var CACHE_NAME = 'gih-cache';
 var CACHED_URLS = [
   'offline.html',
@@ -48,8 +48,9 @@ self.addEventListener('fetch', function(event) {
       });
     })
   );
-});*/
+});
 
+/*
 self.addEventListener('install', function(event) {
   console.log('install');
 });
@@ -65,5 +66,5 @@ self.addEventListener('fetch', function(event) {
       headers: { 'Content-Type': 'text/css' }
     }));
   }
-});
+});*/
 
