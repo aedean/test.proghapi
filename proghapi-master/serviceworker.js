@@ -78,22 +78,7 @@ self.addEventListener('fetch', function(event) {
         return caches.match('offline-map.js');
       })
     );
-      
-  } else if (
-    CACHED_URLS.includes(requestURL.href) ||
-    CACHED_URLS.includes(requestURL.pathname)
-  ) {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function(response) {
-          return response || fetch(event.request);
-        });
-      })
-    );
-  }
-});
-
-// Handle requests for events JSON file
+      // Handle requests for events JSON file
   } else if (requestURL.pathname === BASE_PATH + 'events.json') {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
@@ -119,6 +104,21 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
+
+  } else if (
+    CACHED_URLS.includes(requestURL.href) ||
+    CACHED_URLS.includes(requestURL.pathname)
+  ) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return cache.match(event.request).then(function(response) {
+          return response || fetch(event.request);
+        });
+      })
+    );
+  }
+});
+
 
 
 self.addEventListener('activate', function(event) {
