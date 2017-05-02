@@ -8,13 +8,13 @@ var CACHED_URLS = [
 ];
 console.log("testing attention please");
 self.addEventListener('install', function(event) {
-  console.log("installing..");
   // Cache everything in CACHED_URLS. Installation will fail if something fails to cache
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(CACHED_URLS);
     })
   );
+   console.log("installing..");
 });
 
 /*
@@ -51,7 +51,6 @@ self.addEventListener('fetch', function(event) {
 */
 
 self.addEventListener('fetch', function(event) {
-  console.log("fetching...");
   event.respondWith(
     fetch(event.request).catch(function() {
       return caches.match(event.request).then(function(response) {
@@ -63,6 +62,7 @@ self.addEventListener('fetch', function(event) {
       });
     })
   );
+  console.log("fetching...");
 });
 
 
@@ -80,4 +80,5 @@ self.addEventListener('activate', function(event) {
       );
     })
   );
+  console.log("activating...");
 });
