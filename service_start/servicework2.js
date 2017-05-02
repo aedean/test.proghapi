@@ -41,7 +41,7 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
-    } else if (requestURL.href === googleMapsAPIJS) {
+   else if (requestURL.href === googleMapsAPIJS) {
     event.respondWith(
       fetch(
         googleMapsAPIJS+'&'+Date.now(),
