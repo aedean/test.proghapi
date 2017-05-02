@@ -19,22 +19,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
-  // Handle requests for index.html
-  if (requestURL.pathname === 'first.html') {
-  //If a request doesn't match anything in the cache, get it from the network, 
-  //send it to the page and add it to the cache at the same time.
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          cache.put(event.request, response.clone());
-          return response;
-          });
-        });
-      })
-    );
- // Handle requests for Google Maps JavaScript API file
-  } else if (requestURL.href === googleMapsAPIJS) {
+ if (requestURL.href === googleMapsAPIJS) {
     event.respondWith(
       fetch(
         googleMapsAPIJS+'&'+Date.now(),
@@ -47,7 +32,6 @@ self.addEventListener('fetch', function(event) {
     CACHED_URLS.includes(requestURL.href) ||
     CACHED_URLS.includes(requestURL.pathname)
   ) {
-      
     event.respondWith(
         //Cache falling back to the network
         //If you're making your app offline-first, this is how you'll handle the majority of requests. 
