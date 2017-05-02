@@ -56,14 +56,14 @@ self.addEventListener('activate', function(event) {
           if (CACHE_NAME !== cacheName && cacheName.startsWith('gih-cache')) {
             return caches.delete(cacheName);
             //a promise to delete that cache, and then resolve that promise.
-            /*This statement makes sure we only delete caches which match both of these conditions:
-Their name is different then the active cache’s name.
-Their name begin with gih-cache.
-*/
+            //This statement makes sure we only delete caches which match both of these conditions:
+//Their name is different then the active cache’s name.
+//Their name begin with gih-cache.
+
           }
-          /*Once we have an array of promises to delete caches, 
-          it is passed into Promise.all(), which in turn returns a single 
-          promise to event.waitUntil().*/
+          //Once we have an array of promises to delete caches, 
+          //it is passed into Promise.all(), which in turn returns a single 
+          //promise to event.waitUntil().
 
         })
       );
