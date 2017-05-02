@@ -81,7 +81,7 @@ self.addEventListener('install', function(event) {
   );
 });
 
-/* this is old now
+// this is old now
 
 self.addEventListener('fetch', function(event) { 
   event.respondWith(
@@ -103,7 +103,7 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
-*/
+/*
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
@@ -129,7 +129,7 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
-});
+});*/
 
 
 //this event is called when installed/ waiting for the service worker to become ready 
