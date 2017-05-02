@@ -18,7 +18,8 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  var requestURL = new URL(event.request.url);
+    
+ var requestURL = new URL(event.request.url);
  if (requestURL.href === googleMapsAPIJS) {
     event.respondWith(
       fetch(
