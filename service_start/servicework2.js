@@ -22,8 +22,11 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match('first.html').then(function(cachedResponse) {
-
-          return cachedResponse ;
+          var fetchPromise = fetch('first.html').then(function(networkResponse) {
+            cache.put('first.html', networkResponse.clone());
+            return networkResponse;
+          });
+          return cachedResponse || fetchPromise;
         });
       })
     );
@@ -39,6 +42,7 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
+
 
 
 self.addEventListener('activate', function(event) {
