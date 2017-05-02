@@ -154,7 +154,7 @@ self.addEventListener('fetch', function(event) {
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
     CACHED_URLS.includes(requestURL.pathname)
-  ) // Handle requests for events JSON file
+  ) {// Handle requests for events JSON file
   // Handle requests for events JSON file
   } else if (requestURL.pathname === BASE_PATH + 'events.json') {
     event.respondWith(
