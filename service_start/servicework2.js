@@ -41,7 +41,7 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
-});
+)};
 
 
 self.addEventListener('activate', function(event) {
