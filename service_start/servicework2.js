@@ -8,6 +8,8 @@ var CACHED_URLS = [
   // Images
 ];
 console.log("testing attention please");
+var requestURL = new URL(event.request.url);
+console.log(requestURL.pathname);
 self.addEventListener('install', function(event) {
   // Cache everything in CACHED_URLS. Installation will fail if something fails to cache
   event.waitUntil(
@@ -21,7 +23,17 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
-    event.respondWith("hello");
+   event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request).then(function(response) {
+        if (response) {
+          return response;
+        } else if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('first.html');
+        }
+      });
+    })
+  );
   } else if (CACHED_URLS.includes(requestURL.href) || CACHED_URLS.includes(requestURL.pathname)) {
     event.respondWith("the else");
   }
