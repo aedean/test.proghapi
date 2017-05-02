@@ -1,3 +1,4 @@
+/*
 var CACHE_NAME = 'gih-cache-v5';
 var CACHED_URLS = [
   // Our HTML
@@ -17,7 +18,7 @@ self.addEventListener('install', function(event) {
    console.log("installing..");
 });
 
-/*
+
 self.addEventListener('fetch', function(event) {
   console.log("We are fetching data");
   var requestURL = new URL(event.request.url);
@@ -48,7 +49,7 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
-*/
+
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
@@ -81,4 +82,20 @@ self.addEventListener('activate', function(event) {
     })
   );
   console.log("activating...");
+});
+*/
+
+console.log("SW startup");
+
+self.addEventListener('install', function(event) {
+  console.log("SW installed");
+});
+
+self.addEventListener('activate', function(event) {
+  console.log("SW activated");
+});
+
+self.addEventListener('fetch', function(event) {
+  console.log("Caught a fetch!");
+  event.respondWith(new Response("Hello world!"));
 });
