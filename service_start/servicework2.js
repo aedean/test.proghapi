@@ -41,6 +41,16 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
+    } else if (requestURL.href === googleMapsAPIJS) {
+    event.respondWith(
+      fetch(
+        googleMapsAPIJS+'&'+Date.now(),
+        { mode: 'no-cors', cache: 'no-store' }
+      ).catch(function() {
+        return caches.match('offline-map.js');
+      })
+    );
+}
 });
 
 
