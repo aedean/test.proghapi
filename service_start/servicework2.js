@@ -51,6 +51,7 @@ self.addEventListener('fetch', function(event) {
 */
 
 self.addEventListener('fetch', function(event) {
+  console.log("fetching...");
   event.respondWith(
     fetch(event.request).catch(function() {
       return caches.match(event.request).then(function(response) {
@@ -67,6 +68,7 @@ self.addEventListener('fetch', function(event) {
 
 
 self.addEventListener('activate', function(event) {
+  console.log("activating...");
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
