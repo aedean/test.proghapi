@@ -58,9 +58,6 @@ var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callb
 
 self.addEventListener('install', function(event) {
   // Cache everything in CACHED_URLS. Installation fails if anything fails to cache
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(CACHED_URLS);
-    })
+  event.waitUntil("hey"
   );
 });
