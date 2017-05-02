@@ -33,7 +33,7 @@ self.addEventListener('fetch', function(event) {
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match(event.request).then(function(cachedResponse) {
           return cachedResponse || fetch(event.request).then(function(networkResponse) {
-            cache.put('first.html', networkResponse.clone());
+            cache.put('index.html', networkResponse.clone());
             return networkResponse;
           });
         });
