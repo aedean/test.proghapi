@@ -28,10 +28,7 @@ self.addEventListener('fetch', function(event) {
         return caches.match('offline-map.js');
       })
     );
-  } else if (
-    CACHED_URLS.includes(requestURL.href) ||
-    CACHED_URLS.includes(requestURL.pathname)
-  ) {
+  } else {
     event.respondWith(
         //Cache falling back to the network
         //If you're making your app offline-first, this is how you'll handle the majority of requests. 
