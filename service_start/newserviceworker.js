@@ -1,4 +1,4 @@
-var BASE_PATH = 'test.proghapi/service_start';
+var BASE_PATH = 'test.proghapi/service_start/';
 var CACHE_NAME = 'gih-cache-v6';
 var CACHED_URLS = [
     // Our HTML
