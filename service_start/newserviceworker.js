@@ -57,7 +57,8 @@ var CACHED_URLS = [
 var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=initMap';
 
 self.addEventListener('install', function(event) {
-console.log("blah");
+  event.waitUntil(
+  );
 });
 
 
