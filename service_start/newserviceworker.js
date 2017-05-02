@@ -55,11 +55,3 @@ var CACHED_URLS = [
 ];
 
 var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=initMap';
-
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(CACHED_URLS);
-    })
-  );
-});
