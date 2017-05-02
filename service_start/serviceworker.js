@@ -1,4 +1,4 @@
-var CACHE_NAME = 'gih-cache';
+var CACHE_NAME = 'gih-cache-2';
 var CACHED_URLS = [
   'first.html',
   'paddy.png'
