@@ -18,17 +18,24 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   // Handle requests for index.html
   if (requestURL.pathname === BASE_PATH + 'first.html') {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match('first.html').then(function(cachedResponse) {
-          var fetchPromise = fetch('first.html').then(function(networkResponse) {
+        return cache.match(event.request).then(function(cachedResponse) {
+          return cachedResponse || fetch(event.request).then(function(networkResponse) {
             cache.put('first.html', networkResponse.clone());
             return networkResponse;
           });
-          return cachedResponse || fetchPromise;
         });
       })
     );
