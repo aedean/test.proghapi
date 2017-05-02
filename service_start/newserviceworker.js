@@ -1,4 +1,3 @@
-var BASE_PATH = 'test.proghapi/service_start/';
 var CACHE_NAME = 'gih-cache-v6';
 var CACHED_URLS = [
     // Our HTML
@@ -7,7 +6,7 @@ var CACHED_URLS = [
 
 ];
 
-var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=initMap';
+var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBN5zI49rINBx5ofv8JjJKXcToGqj5Ad84&callback=initMap';
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
@@ -17,24 +16,19 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    })
-  );
-});
 
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   // Handle requests for index.html
-  if (requestURL.pathname === BASE_PATH + 'first.html') {
+  if (requestURL.pathname === 'first.html') {
+  //If a request doesn't match anything in the cache, get it from the network, 
+  //send it to the page and add it to the cache at the same time.
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function(cachedResponse) {
-          return cachedResponse || fetch(event.request).then(function(networkResponse) {
-            cache.put('index.html', networkResponse.clone());
-            return networkResponse;
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
           });
         });
       })
@@ -53,13 +47,19 @@ self.addEventListener('fetch', function(event) {
     CACHED_URLS.includes(requestURL.href) ||
     CACHED_URLS.includes(requestURL.pathname)
   ) {
+      
     event.respondWith(
+        //Cache falling back to the network
+        //If you're making your app offline-first, this is how you'll handle the majority of requests. 
+        //Other patterns will be exceptions based on the incoming request.
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match(event.request).then(function(response) {
           return response || fetch(event.request);
         });
       })
     );
+    //This gives you the "Cache only" behavior for things in the cache and the "Network only" 
+    //behaviour for anything not cached   
   }
 });
 
