@@ -32,7 +32,7 @@ self.addEventListener('fetch', function(event) {
     );
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
-    CACHED_URLS.includes(requestURL.pathname) {
+    CACHED_URLS.includes(requestURL.pathname)) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match(event.request).then(function(response) {
@@ -41,7 +41,7 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
-)};
+});
 
 
 self.addEventListener('activate', function(event) {
