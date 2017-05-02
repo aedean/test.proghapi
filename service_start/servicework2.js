@@ -6,8 +6,9 @@ var CACHED_URLS = [
   // JavaScript
   // Images
 ];
-
+console.log("testing attention please");
 self.addEventListener('install', function(event) {
+  console.log("installing..");
   // Cache everything in CACHED_URLS. Installation will fail if something fails to cache
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
