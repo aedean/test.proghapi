@@ -21,19 +21,9 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
-    event.respondWith("hello"
-        );
-  } else if (
-    CACHED_URLS.includes(requestURL.href) ||
-    CACHED_URLS.includes(requestURL.pathname)) {
-    console.log("We arent loading first.html");
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function(response) {
-          return response || fetch(event.request);
-        })
-      })
-    );
+    event.respondWith("hello");
+  } else if (CACHED_URLS.includes(requestURL.href) || CACHED_URLS.includes(requestURL.pathname)) {
+    event.respondWith("the else");
   }
 });
 
