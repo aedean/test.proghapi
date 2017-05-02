@@ -17,6 +17,7 @@ self.addEventListener('install', function(event) {
   );
 });
 
+/*
 self.addEventListener('fetch', function(event) {
   console.log("We are fetching data");
   var requestURL = new URL(event.request.url);
@@ -46,6 +47,21 @@ self.addEventListener('fetch', function(event) {
       })
     );
   }
+});
+*/
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request).then(function(response) {
+        if (response) {
+          return response;
+        } else if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('first.html');
+        }
+      });
+    })
+  );
 });
 
 
