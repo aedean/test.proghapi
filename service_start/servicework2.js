@@ -1,4 +1,4 @@
-/*
+
 var CACHE_NAME = 'gih-cache-v5';
 var CACHED_URLS = [
   // Our HTML
@@ -20,21 +20,19 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  console.log("We are fetching data");
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
-    console.log("first html!");
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match('first.html').then(function(cachedResponse) {
           var fetchPromise = fetch('first.html').then(function(networkResponse) {
             cache.put('first.html', networkResponse.clone());
-            console.log(networkResponse);
             return networkResponse;
           });
-          return cachedResponse || fetchPromise;
+          
         });
       })
+        return cachedResponse || fetchPromise;
     );
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
@@ -50,7 +48,7 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
-
+/*
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     fetch(event.request).catch(function() {
@@ -65,6 +63,7 @@ self.addEventListener('fetch', function(event) {
   );
   console.log("fetching...");
 });
+*/
 
 
 
@@ -82,20 +81,4 @@ self.addEventListener('activate', function(event) {
     })
   );
   console.log("activating...");
-});
-*/
-
-console.log("SW startup");
-
-self.addEventListener('install', function(event) {
-  console.log("SW installed");
-});
-
-self.addEventListener('activate', function(event) {
-  console.log("SW activated");
-});
-
-self.addEventListener('fetch', function(event) {
-  console.log("Caught a fetch!");
-  event.respondWith(new Response("Hello world!"));
 });
