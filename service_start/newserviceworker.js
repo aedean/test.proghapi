@@ -2,8 +2,9 @@ var BASE_PATH = 'test.proghapi/service_start/';
 var CACHE_NAME = 'gih-cache-v6';
 var CACHED_URLS = [
     // Our HTML
-    BASE_PATH + 'first.html', 
-    BASE_PATH + 'styles.css'
+    'first.html',
+    'styles.css'
+
 ];
 
 var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=initMap';
