@@ -21,13 +21,7 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match('first.html').then(function(cachedResponse) {
-        return cachedResponse;
-        }
-      )}   
-    )
+    event.respondWith("hello"
         );
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
