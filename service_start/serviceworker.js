@@ -115,10 +115,19 @@ self.addEventListener('activate', function(event) {
       return Promise.all(
         //promise all wraps all the promises into one single promise
         cacheNames.map(function(cacheName) { 
-          //here we create the array that we are going 
+          //using Array.map() to create a promise from each cache name 
           if (CACHE_NAME !== cacheName && cacheName.startsWith('gih-cache')) {
             return caches.delete(cacheName);
+            //a promise to delete that cache, and then resolve that promise.
+            /*This statement makes sure we only delete caches which match both of these conditions:
+Their name is different then the active cache’s name.
+Their name begin with gih-cache.
+*/
           }
+          /*Once we have an array of promises to delete caches, 
+          it is passed into Promise.all(), which in turn returns a single 
+          promise to event.waitUntil().*/
+
         })
       );
     })
