@@ -17,6 +17,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log("We are fetching data");
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
     console.log("first html!");
