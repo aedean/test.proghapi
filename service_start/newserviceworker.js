@@ -56,6 +56,11 @@ var CACHED_URLS = [
 
 var googleMapsAPIJS = 'https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=initMap';
 
+self.addEventListener('install', function(event) {
+console.log("blah");
+});
+
+
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   // Handle requests for index.html
