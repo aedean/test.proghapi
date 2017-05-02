@@ -36,33 +36,6 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
-/*
-self.addEventListener('fetch', function(event) {
-  var requestURL = new URL(event.request.url);
-  if (requestURL.pathname === 'first.html') {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match('first.html').then(function(cachedResponse) {
-          var fetchPromise = fetch('first.html').then(function(networkResponse) {
-            cache.put('first.html', networkResponse.clone());
-            return networkResponse;
-          });
-          return cachedResponse || fetchPromise;
-        });
-      })
-    );
-  } else if (
-    CACHED_URLS.includes(requestURL.href) ||
-    CACHED_URLS.includes(requestURL.pathname) {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return cache.match(event.request).then(function(response) {
-          return response || fetch(event.request);
-        })
-      })
-    );
-  }
-});*/
 
 
 //this event is called when installed/ waiting for the service worker to become ready 
