@@ -1,7 +1,7 @@
 var CACHE_NAME = 'gih-cache-v5';
 var CACHED_URLS = [
   // Our HTML
-  'first.html',
+  'first.html'
   // Stylesheets and fonts
   // JavaScript
   // Images
