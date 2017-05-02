@@ -19,11 +19,13 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.pathname === 'first.html') {
+    console.log("first html!");
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match('first.html').then(function(cachedResponse) {
           var fetchPromise = fetch('first.html').then(function(networkResponse) {
             cache.put('first.html', networkResponse.clone());
+            console.log(networkResponse);
             return networkResponse;
           });
           return cachedResponse || fetchPromise;
@@ -33,6 +35,7 @@ self.addEventListener('fetch', function(event) {
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
     CACHED_URLS.includes(requestURL.pathname)) {
+    console.log("We arent loading first.html");
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match(event.request).then(function(response) {
